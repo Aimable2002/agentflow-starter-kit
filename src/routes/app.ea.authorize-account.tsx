@@ -66,8 +66,12 @@ function AuthorizeAccount() {
 
           <Panel>
             <h2 className="font-display text-base font-semibold">
-              {accounts.length ? "Add another account" : "Authorize your MT5 account"}
+              {accounts.length ? "Authorize another account" : "Authorize your account"}
             </h2>
+            <p className="mt-2 text-xs text-fog">
+              Authorizing an account does not connect to MT5 or verify anything automatically - it tells us this
+              login number is yours so we can match the data your EA is already sending and activate it.
+            </p>
             <form
               className="mt-4 space-y-3"
               onSubmit={async (e) => {
