@@ -4,6 +4,7 @@ import { Download, FileArchive, Search, ShieldCheck } from "lucide-react";
 import { format } from "date-fns";
 import { PageHeader } from "@/components/app/app-shell";
 import { Panel } from "@/components/pink/primitives";
+import { Button } from "@/components/ui/button";
 import { createReleaseDownloadUrl, useEaReleases, type EaRelease } from "@/lib/ea";
 
 export const Route = createFileRoute("/app/ea/releases")({
@@ -107,7 +108,7 @@ function ReleaseCard({ release, featured = false }: { release: EaRelease; featur
           </div>
           {downloadError && <p className="mt-3 text-xs text-pink">{downloadError}</p>}
         </div>
-        <button
+        <Button
           type="button"
           disabled={downloading}
           onClick={async () => {
@@ -121,10 +122,10 @@ function ReleaseCard({ release, featured = false }: { release: EaRelease; featur
               setDownloading(false);
             }
           }}
-          className="inline-flex shrink-0 items-center justify-center gap-2 rounded-md bg-pink px-5 py-2.5 text-sm font-medium text-ink hover:bg-white disabled:opacity-50"
+          className="shrink-0 bg-pink text-ink hover:bg-white"
         >
           <Download className="size-4" /> {downloading ? "Preparing…" : "Download"}
-        </button>
+        </Button>
       </div>
     </Panel>
   );

@@ -27,8 +27,8 @@
       Supabase project, so migrations cannot be applied from here)
 
 ## DirectionalTrendEA reporting
-- [x] Public page /ea/directional-trend-ea, /app/ea/dashboard, /app/ea/dashboard/$accountId, /app/ea/connect-account, /app/ea/billing
-- [ ] Reorganize EA navigation: public service presentation; signed-in documentation, authorization, downloads, dashboard, and billing
-- [ ] Add structured EA releases: version history, current release details, notes, file metadata, and controlled publishing workflow
+- [x] Public page /ea/directional-trend-ea, /app/ea/dashboard, /app/ea/dashboard/$accountId, /app/ea/authorize-account, /app/ea/billing
+- [x] Reorganize EA navigation: public service presentation; signed-in documentation, authorization, releases, dashboard, and billing
+- [x] Add structured EA releases: version history, current release details, notes, file metadata, and controlled publishing workflow
 - [ ] Run `db/008_ea_reporting.sql` in Supabase (blocked: external Supabase project)
 - [ ] Fill placeholders: functions base URL, anon key, support email, FAQ answers (blocked: owner input)

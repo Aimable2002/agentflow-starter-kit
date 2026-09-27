@@ -26,6 +26,8 @@ export const Route = createFileRoute("/")({
         content:
           "Tiered model routing, seven MCP connectors and background task execution in one continuous workspace.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: Landing,
