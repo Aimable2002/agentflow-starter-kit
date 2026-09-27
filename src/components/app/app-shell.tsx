@@ -37,7 +37,7 @@ const primaryNav = [
   { to: "/app/agent-services", label: "Agent services", icon: Radar, exact: true },
   { to: "/app/agent-services/mt5-ea", label: "MT5 EA execution", icon: ServerCog },
   { to: "/app/ea/dashboard", label: "EA dashboard", icon: LineChart },
-  { to: "/app/ea/connect-account", label: "Connect account", icon: Link2 },
+  { to: "/app/ea/authorize-account", label: "Authorize account", icon: Link2 },
   { to: "/app/ea/billing", label: "EA billing", icon: BadgeCheck },
 ] as const;
 

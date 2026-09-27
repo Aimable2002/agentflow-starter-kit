@@ -24,10 +24,10 @@ drop policy if exists "Public read ea-downloads" on storage.objects;
 create policy "Public read ea-downloads" on storage.objects
   for select to anon, authenticated using (bucket_id = 'ea-downloads');
 
--- Users may connect their own MT5 login (status stays at its default).
+-- Users may authorize their own MT5 login (status stays at its default).
 grant insert on public.accounts to authenticated;
-drop policy if exists "Users connect their own MT5 login" on public.accounts;
-create policy "Users connect their own MT5 login" on public.accounts
+drop policy if exists "Users authorize their own MT5 login" on public.accounts;
+create policy "Users authorize their own MT5 login" on public.accounts
   for insert to authenticated
   with check (user_id = auth.uid() and status = 'inactive');
 -- mt5_login uniqueness is enforced by the existing unique constraint.
