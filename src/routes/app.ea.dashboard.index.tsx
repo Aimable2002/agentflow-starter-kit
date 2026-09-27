@@ -12,7 +12,7 @@ export const Route = createFileRoute("/app/ea/dashboard/")({
   head: () => ({
     meta: [
       { title: "EA dashboard | DirectionalTrendEA" },
-      { name: "description", content: "Equity, balance and profit across your connected MT5 accounts." },
+      { name: "description", content: "Equity, balance and profit across your authorized MT5 accounts." },
       { property: "og:title", content: "DirectionalTrendEA dashboard" },
       { property: "og:description", content: "Overview of every MT5 account running DirectionalTrendEA." },
     ],
@@ -54,13 +54,13 @@ function EaDashboard() {
           <p className="text-sm text-mute">Loading…</p>
         ) : accounts.length === 0 ? (
           <Panel className="text-center">
-            <p className="font-display text-lg">No connected accounts yet</p>
-            <p className="mt-2 text-sm text-fog">Connect your MT5 login to start seeing reported data.</p>
+            <p className="font-display text-lg">No authorized accounts yet</p>
+            <p className="mt-2 text-sm text-fog">Authorize your MT5 login number to start seeing the data your EA reports.</p>
             <Link
-              to="/app/ea/connect-account"
+              to="/app/ea/authorize-account"
               className="mt-4 inline-block rounded-md bg-pink px-4 py-2 text-sm font-medium text-ink hover:bg-white"
             >
-              Connect account
+              Authorize account
             </Link>
           </Panel>
         ) : (

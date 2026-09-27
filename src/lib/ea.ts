@@ -142,7 +142,7 @@ export function releaseUrl(filePath: string) {
   return supabase.storage.from("ea-downloads").getPublicUrl(filePath).data.publicUrl;
 }
 
-export function useConnectAccount() {
+export function useAuthorizeAccount() {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: async (mt5Login: number) => {
@@ -150,7 +150,7 @@ export function useConnectAccount() {
       const { error } = await supabase.from("accounts").insert({ user_id: uid, mt5_login: mt5Login });
       if (error) {
         if (error.code === "23505")
-          throw new Error("That MT5 login is already connected to another account.");
+          throw new Error("That MT5 login is already authorized by another user.");
         throw new Error(error.message);
       }
     },

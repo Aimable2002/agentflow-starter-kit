@@ -109,12 +109,12 @@ function AccountDetail() {
             <p className="font-display text-base">Setup incomplete</p>
             <p className="mt-1 text-sm text-fog">
               This account has never checked in. Make sure the EA is attached with the right inputs.{" "}
-              <Link to="/ea/directional-trend-ea" hash="connect" className="text-pink underline">
+              <Link to="/ea/directional-trend-ea" hash="setup" className="text-pink underline">
                 Setup guide
               </Link>{" "}
               ·{" "}
-              <Link to="/app/ea/connect-account" className="text-pink underline">
-                Connect account
+              <Link to="/app/ea/authorize-account" className="text-pink underline">
+                Authorize account
               </Link>
             </p>
           </Panel>

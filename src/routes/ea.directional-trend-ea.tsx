@@ -1,9 +1,10 @@
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { format } from "date-fns";
 import { Download } from "lucide-react";
 import { SiteLayout } from "@/components/site/site-layout";
 import { Panel } from "@/components/pink/primitives";
+import { supabase } from "@/integrations/supabase/client";
 import { releaseUrl, useLatestRelease } from "@/lib/ea";
 
 export const Route = createFileRoute("/ea/directional-trend-ea")({
@@ -29,32 +30,44 @@ export const Route = createFileRoute("/ea/directional-trend-ea")({
 
 const sections = [
   ["what", "What it does"],
-  ["risk", "Risk warning"],
   ["how", "How it works"],
-  ["connect", "How to connect"],
+  ["risk", "Risk warning"],
+  ["setup", "Setting it up in MT5"],
+  ["authorize", "Authorize your account"],
   ["download", "Download"],
   ["faq", "FAQ"],
 ] as const;
 
 const faqs = [
   {
-    q: "Do I need to leave MT5 running?",
-    a: "Yes. The EA only trades and reports while MT5 is open with the EA attached to a chart, so it is typical to run it on a VPS or an always-on computer.",
+    q: "Does the website ever connect to my MT5 account?",
+    a: "No. The EA runs entirely inside your own MT5 terminal and reports to us on its own. The website never talks to MT5 - it only lets you authorize an MT5 login number as yours.",
   },
   { q: "What happens if my subscription lapses?", a: "[CONFIRM WITH OWNER]" },
   { q: "Does this work on any broker?", a: "[CONFIRM WITH OWNER]" },
   {
-    q: "Can I run this on multiple accounts?",
-    a: "You can connect more than one MT5 login on the Connect Account page. Each account is activated for trading separately. [CONFIRM WITH OWNER]",
+    q: "Can I authorize multiple accounts?",
+    a: "Yes, you can authorize more than one MT5 login number on the Authorize Account page. Each account is activated for trading separately. [CONFIRM WITH OWNER]",
   },
   {
     q: "Where do I see my results?",
-    a: "Every closed trade and a periodic account snapshot are reported to your dashboard automatically once the EA is connected.",
+    a: "Once your login number is authorized, the closed trades and account snapshots your EA reports appear on your dashboard.",
   },
 ];
 
+function useSignedIn() {
+  const [signedIn, setSignedIn] = useState(false);
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => setSignedIn(!!data.session));
+    const { data } = supabase.auth.onAuthStateChange((_e, s) => setSignedIn(!!s));
+    return () => data.subscription.unsubscribe();
+  }, []);
+  return signedIn;
+}
+
 function EaDocs() {
   const { data: release } = useLatestRelease();
+  const signedIn = useSignedIn();
   return (
     <SiteLayout>
       <section className="border-b border-line">
@@ -64,17 +77,6 @@ function EaDocs() {
           <p className="mt-4 max-w-2xl text-lg text-fog">
             A single-position, direction-confirming trend-following expert advisor for MetaTrader 5.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a href="#download" className="rounded-md bg-pink px-5 py-2.5 text-sm font-medium text-ink hover:bg-white">
-              Download EA
-            </a>
-            <Link
-              to="/app/ea/connect-account"
-              className="rounded-md border border-line px-5 py-2.5 text-sm text-white hover:border-pink/50"
-            >
-              Connect your account
-            </Link>
-          </div>
         </div>
       </section>
 
@@ -99,6 +101,20 @@ function EaDocs() {
           </p>
         </Section>
 
+        <Section id="how" title="How it works">
+          <ul className="list-disc space-y-2 pl-5 text-fog">
+            <li>Direction is only confirmed when enough of its enabled signals agree (configurable by the user in MT5)</li>
+            <li>Only one position open at a time, no averaging or pyramiding</li>
+            <li>A mandatory stop-loss is attached to every trade</li>
+            <li>An optional hard dollar loss cap can bound the worst case on any single trade</li>
+            <li>
+              Runs entirely inside your own MT5 terminal; it automatically reports every closed trade and a
+              periodic account snapshot to your dashboard on this site - this reporting is the only data path
+              between the EA and us, and it is initiated by the EA itself, not by this website
+            </li>
+          </ul>
+        </Section>
+
         <Section id="risk" title="Risk warning">
           <Panel accent>
             <p className="text-sm leading-relaxed text-white">
@@ -113,20 +129,13 @@ function EaDocs() {
           </Panel>
         </Section>
 
-        <Section id="how" title="How it works">
-          <ul className="list-disc space-y-2 pl-5 text-fog">
-            <li>Direction is only confirmed when enough of its enabled signals agree (configurable)</li>
-            <li>Only one position open at a time, no averaging or pyramiding</li>
-            <li>A mandatory stop-loss is attached to every trade</li>
-            <li>An optional hard dollar loss cap can bound the worst case per trade</li>
-            <li>Reports every closed trade and a periodic account snapshot back to your dashboard automatically</li>
-          </ul>
-        </Section>
-
-        <Section id="connect" title="How to connect">
+        <Section id="setup" title="Setting it up in MT5">
+          <p className="mb-4 text-sm text-mute">
+            These steps happen entirely inside MT5, on your own computer. The website is not involved.
+          </p>
           <ol className="list-decimal space-y-3 pl-5 text-fog">
             <li>
-              Download the EA file below and copy it into your MT5 <code className="text-white">MQL5/Experts</code> folder
+              Copy the downloaded EA file into your MT5 <code className="text-white">MQL5/Experts</code> folder
             </li>
             <li>
               In MT5: Tools → Options → Expert Advisors → check "Allow WebRequest for listed URL" and add:{" "}
@@ -134,20 +143,34 @@ function EaDocs() {
             </li>
             <li>
               Attach the EA to a chart, open its Inputs tab, and set <code className="text-white">InpSupabaseBaseUrl</code>{" "}
-              and <code className="text-white">InpSupabaseAnonKey</code> to the values shown on your{" "}
-              <Link to="/app/ea/connect-account" className="text-pink underline">Connect Account</Link> page after
-              logging in
+              and <code className="text-white">InpSupabaseAnonKey</code> to the values shown in the Authorize
+              Account section below
             </li>
             <li>
-              Go to <Link to="/app/ea/connect-account" className="text-pink underline">Connect Account</Link> and enter
-              your MT5 account login number so we can match your reported data to your account
-            </li>
-            <li>
-              An admin activates your account before the EA is permitted to open new trades - reporting and
-              dashboard data work immediately, trading is gated separately (see{" "}
-              <Link to="/app/ea/billing" className="text-pink underline">Billing</Link>)
+              Once running, the EA reports its MT5 login number and trade data to us on its own - nothing further
+              to do in MT5
             </li>
           </ol>
+        </Section>
+
+        <Section id="authorize" title="Authorize your account">
+          <p className="text-fog">
+            Setting up the EA in MT5 (previous section) is a separate action from what happens here. Running the
+            EA makes it report data under its own MT5 login number - it does not yet know that login number
+            belongs to you. Authorizing tells us "this MT5 login is mine," so we can match the data it's already
+            sending to your account here and activate it for trading.
+          </p>
+          <div className="mt-5">
+            <Link
+              to={signedIn ? "/app/ea/authorize-account" : "/login"}
+              className="inline-flex rounded-md bg-pink px-5 py-2.5 text-sm font-medium text-ink hover:bg-white"
+            >
+              Authorize Account
+            </Link>
+            <p className="mt-2 text-xs text-mute">
+              You'll need your MT5 account login number, shown in MT5 under your account details.
+            </p>
+          </div>
         </Section>
 
         <Section id="download" title="Download">
@@ -163,7 +186,14 @@ function EaDocs() {
               )}
               {release?.release_notes && <p className="mt-2 text-sm text-fog">{release.release_notes}</p>}
             </div>
-            {release ? (
+            {release && !signedIn ? (
+              <Link
+                to="/login"
+                className="inline-flex items-center gap-2 rounded-md bg-pink px-5 py-2.5 text-sm font-medium text-ink hover:bg-white sm:ml-auto"
+              >
+                <Download className="size-4" /> Log in to download
+              </Link>
+            ) : release ? (
               <a
                 href={releaseUrl(release.file_path)}
                 className="inline-flex items-center gap-2 rounded-md bg-pink px-5 py-2.5 text-sm font-medium text-ink hover:bg-white sm:ml-auto"

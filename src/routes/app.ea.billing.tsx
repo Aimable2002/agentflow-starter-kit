@@ -8,7 +8,7 @@ export const Route = createFileRoute("/app/ea/billing")({
   head: () => ({
     meta: [
       { title: "EA billing status | DirectionalTrendEA" },
-      { name: "description", content: "See whether each connected MT5 account is active for trading." },
+      { name: "description", content: "See whether each authorized MT5 account is active for trading." },
       { property: "og:title", content: "DirectionalTrendEA billing status" },
       { property: "og:description", content: "Trading activation status for your MT5 accounts." },
     ],
@@ -20,16 +20,16 @@ function EaBilling() {
   const { data: accounts = [], isLoading } = useEaAccounts();
   return (
     <div>
-      <PageHeader title="EA billing" copy="Trading activation status for each connected MT5 account." />
+      <PageHeader title="EA billing" copy="Trading activation status for each authorized MT5 account." />
       <div className="space-y-4 px-4 py-6 lg:px-8">
         {/* TODO: payment provider integration - status is currently set manually by an admin in Supabase */}
         {isLoading && <p className="text-sm text-mute">Loading…</p>}
         {!isLoading && accounts.length === 0 && (
           <Panel>
             <p className="text-sm text-fog">
-              No connected accounts yet.{" "}
-              <Link to="/app/ea/connect-account" className="text-pink underline">
-                Connect an account
+              No authorized accounts yet.{" "}
+              <Link to="/app/ea/authorize-account" className="text-pink underline">
+                Authorize an account
               </Link>
             </p>
           </Panel>

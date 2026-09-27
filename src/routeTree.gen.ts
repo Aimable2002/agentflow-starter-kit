@@ -41,8 +41,8 @@ import { Route as AppConnectorsIndexRouteImport } from './routes/app.connectors.
 import { Route as AppConnectorsConnectorIdRouteImport } from './routes/app.connectors.$connectorId'
 import { Route as AppConversationsIndexRouteImport } from './routes/app.conversations.index'
 import { Route as AppConversationsConversationIdRouteImport } from './routes/app.conversations.$conversationId'
+import { Route as AppEaAuthorizeAccountRouteImport } from './routes/app.ea.authorize-account'
 import { Route as AppEaBillingRouteImport } from './routes/app.ea.billing'
-import { Route as AppEaConnectAccountRouteImport } from './routes/app.ea.connect-account'
 import { Route as AppSettingsAccountRouteImport } from './routes/app.settings.account'
 import { Route as AppSettingsApiKeysRouteImport } from './routes/app.settings.api-keys'
 import { Route as AppSettingsNotificationsRouteImport } from './routes/app.settings.notifications'
@@ -215,14 +215,14 @@ const AppConversationsConversationIdRoute =
     path: '/conversations/$conversationId',
     getParentRoute: () => AppRoute,
   } as any)
+const AppEaAuthorizeAccountRoute = AppEaAuthorizeAccountRouteImport.update({
+  id: '/ea/authorize-account',
+  path: '/ea/authorize-account',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppEaBillingRoute = AppEaBillingRouteImport.update({
   id: '/ea/billing',
   path: '/ea/billing',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppEaConnectAccountRoute = AppEaConnectAccountRouteImport.update({
-  id: '/ea/connect-account',
-  path: '/ea/connect-account',
   getParentRoute: () => AppRoute,
 } as any)
 const AppSettingsAccountRoute = AppSettingsAccountRouteImport.update({
@@ -292,8 +292,8 @@ export interface FileRoutesByFullPath {
   '/app/agent-services/trading-agent': typeof AppAgentServicesTradingAgentRoute
   '/app/connectors/$connectorId': typeof AppConnectorsConnectorIdRoute
   '/app/conversations/$conversationId': typeof AppConversationsConversationIdRoute
+  '/app/ea/authorize-account': typeof AppEaAuthorizeAccountRoute
   '/app/ea/billing': typeof AppEaBillingRoute
-  '/app/ea/connect-account': typeof AppEaConnectAccountRoute
   '/app/settings/account': typeof AppSettingsAccountRoute
   '/app/settings/api-keys': typeof AppSettingsApiKeysRoute
   '/app/settings/notifications': typeof AppSettingsNotificationsRoute
@@ -334,8 +334,8 @@ export interface FileRoutesByTo {
   '/app/agent-services/trading-agent': typeof AppAgentServicesTradingAgentRoute
   '/app/connectors/$connectorId': typeof AppConnectorsConnectorIdRoute
   '/app/conversations/$conversationId': typeof AppConversationsConversationIdRoute
+  '/app/ea/authorize-account': typeof AppEaAuthorizeAccountRoute
   '/app/ea/billing': typeof AppEaBillingRoute
-  '/app/ea/connect-account': typeof AppEaConnectAccountRoute
   '/app/settings/account': typeof AppSettingsAccountRoute
   '/app/settings/api-keys': typeof AppSettingsApiKeysRoute
   '/app/settings/notifications': typeof AppSettingsNotificationsRoute
@@ -378,8 +378,8 @@ export interface FileRoutesById {
   '/app/agent-services/trading-agent': typeof AppAgentServicesTradingAgentRoute
   '/app/connectors/$connectorId': typeof AppConnectorsConnectorIdRoute
   '/app/conversations/$conversationId': typeof AppConversationsConversationIdRoute
+  '/app/ea/authorize-account': typeof AppEaAuthorizeAccountRoute
   '/app/ea/billing': typeof AppEaBillingRoute
-  '/app/ea/connect-account': typeof AppEaConnectAccountRoute
   '/app/settings/account': typeof AppSettingsAccountRoute
   '/app/settings/api-keys': typeof AppSettingsApiKeysRoute
   '/app/settings/notifications': typeof AppSettingsNotificationsRoute
@@ -423,8 +423,8 @@ export interface FileRouteTypes {
     | '/app/agent-services/trading-agent'
     | '/app/connectors/$connectorId'
     | '/app/conversations/$conversationId'
+    | '/app/ea/authorize-account'
     | '/app/ea/billing'
-    | '/app/ea/connect-account'
     | '/app/settings/account'
     | '/app/settings/api-keys'
     | '/app/settings/notifications'
@@ -465,8 +465,8 @@ export interface FileRouteTypes {
     | '/app/agent-services/trading-agent'
     | '/app/connectors/$connectorId'
     | '/app/conversations/$conversationId'
+    | '/app/ea/authorize-account'
     | '/app/ea/billing'
-    | '/app/ea/connect-account'
     | '/app/settings/account'
     | '/app/settings/api-keys'
     | '/app/settings/notifications'
@@ -508,8 +508,8 @@ export interface FileRouteTypes {
     | '/app/agent-services/trading-agent'
     | '/app/connectors/$connectorId'
     | '/app/conversations/$conversationId'
+    | '/app/ea/authorize-account'
     | '/app/ea/billing'
-    | '/app/ea/connect-account'
     | '/app/settings/account'
     | '/app/settings/api-keys'
     | '/app/settings/notifications'
@@ -770,18 +770,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppConversationsConversationIdRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/ea/authorize-account': {
+      id: '/app/ea/authorize-account'
+      path: '/ea/authorize-account'
+      fullPath: '/app/ea/authorize-account'
+      preLoaderRoute: typeof AppEaAuthorizeAccountRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/ea/billing': {
       id: '/app/ea/billing'
       path: '/ea/billing'
       fullPath: '/app/ea/billing'
       preLoaderRoute: typeof AppEaBillingRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/app/ea/connect-account': {
-      id: '/app/ea/connect-account'
-      path: '/ea/connect-account'
-      fullPath: '/app/ea/connect-account'
-      preLoaderRoute: typeof AppEaConnectAccountRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/settings/account': {
@@ -846,8 +846,8 @@ interface AppRouteChildren {
   AppAgentServicesTradingAgentRoute: typeof AppAgentServicesTradingAgentRoute
   AppConnectorsConnectorIdRoute: typeof AppConnectorsConnectorIdRoute
   AppConversationsConversationIdRoute: typeof AppConversationsConversationIdRoute
+  AppEaAuthorizeAccountRoute: typeof AppEaAuthorizeAccountRoute
   AppEaBillingRoute: typeof AppEaBillingRoute
-  AppEaConnectAccountRoute: typeof AppEaConnectAccountRoute
   AppSettingsAccountRoute: typeof AppSettingsAccountRoute
   AppSettingsApiKeysRoute: typeof AppSettingsApiKeysRoute
   AppSettingsNotificationsRoute: typeof AppSettingsNotificationsRoute
@@ -871,8 +871,8 @@ const AppRouteChildren: AppRouteChildren = {
   AppAgentServicesTradingAgentRoute: AppAgentServicesTradingAgentRoute,
   AppConnectorsConnectorIdRoute: AppConnectorsConnectorIdRoute,
   AppConversationsConversationIdRoute: AppConversationsConversationIdRoute,
+  AppEaAuthorizeAccountRoute: AppEaAuthorizeAccountRoute,
   AppEaBillingRoute: AppEaBillingRoute,
-  AppEaConnectAccountRoute: AppEaConnectAccountRoute,
   AppSettingsAccountRoute: AppSettingsAccountRoute,
   AppSettingsApiKeysRoute: AppSettingsApiKeysRoute,
   AppSettingsNotificationsRoute: AppSettingsNotificationsRoute,
