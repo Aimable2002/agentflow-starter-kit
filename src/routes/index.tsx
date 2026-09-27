@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, BarChart3, ShieldCheck, TrendingUp } from "lucide-react";
 import { SiteLayout, CtaBand } from "@/components/site/site-layout";
 import {
   ActivityBars,
@@ -160,6 +161,38 @@ function Landing() {
                 {i < connectors.length - 1 && <span className="text-line">•</span>}
               </span>
             ))}
+          </div>
+        </section>
+
+        <section className="border-t border-line py-16">
+          <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
+            <div>
+              <p className="font-mono text-xs uppercase tracking-[0.2em] text-pink">Algorithm service</p>
+              <h2 className="mt-4 font-display text-3xl font-semibold">DirectionalTrendEA</h2>
+              <p className="mt-4 text-fog">
+                A disciplined MetaTrader 5 trend-following algorithm with controlled exposure and private
+                performance reporting.
+              </p>
+              <Link to="/ea/directional-trend-ea" className="mt-6 inline-flex items-center gap-2 text-sm text-pink hover:underline">
+                Explore the EA service <ArrowRight className="size-4" />
+              </Link>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-3">
+              {[
+                [TrendingUp, "Confirmed direction", "Multiple signals must agree before entry."],
+                [ShieldCheck, "Bounded risk", "A stop-loss is mandatory on every trade."],
+                [BarChart3, "Private reporting", "Track reported results in your workspace."],
+              ].map(([Icon, title, copy]) => {
+                const ServiceIcon = Icon as typeof TrendingUp;
+                return (
+                  <Panel key={title as string}>
+                    <ServiceIcon className="size-5 text-mint" />
+                    <h3 className="mt-3 font-display font-semibold">{title as string}</h3>
+                    <p className="mt-2 text-sm text-fog">{copy as string}</p>
+                  </Panel>
+                );
+              })}
+            </div>
           </div>
         </section>
 

@@ -7,6 +7,7 @@ import { Panel } from "@/components/pink/primitives";
 import { EaStatusBadge, LastSeen } from "@/components/ea/ea-ui";
 import { money, netOf, useEaAccounts, useEaTrades, useEquitySnapshots, type EaAccount, type EaTrade } from "@/lib/ea";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/app/ea/dashboard/")({
   head: () => ({
@@ -15,6 +16,8 @@ export const Route = createFileRoute("/app/ea/dashboard/")({
       { name: "description", content: "Equity, balance and profit across your authorized MT5 accounts." },
       { property: "og:title", content: "DirectionalTrendEA dashboard" },
       { property: "og:description", content: "Overview of every MT5 account running DirectionalTrendEA." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: EaDashboard,
@@ -35,8 +38,11 @@ function EaDashboard() {
         actions={
           <div className="flex rounded-md border border-line bg-ink2 p-0.5">
             {(["all", "month", "week"] as Period[]).map((p) => (
-              <button
+              <Button
                 key={p}
+                type="button"
+                variant="ghost"
+                size="sm"
                 onClick={() => setPeriod(p)}
                 className={cn(
                   "rounded px-3 py-1 font-mono text-[11px]",
@@ -44,7 +50,7 @@ function EaDashboard() {
                 )}
               >
                 {p === "all" ? "All time" : p === "month" ? "This month" : "This week"}
-              </button>
+              </Button>
             ))}
           </div>
         }

@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { PageHeader } from "@/components/app/app-shell";
 import { Panel } from "@/components/pink/primitives";
+import { Button } from "@/components/ui/button";
 import { CopyField, EaStatusBadge, LastSeen } from "@/components/ea/ea-ui";
 import {
   EA_ANON_KEY_PLACEHOLDER,
@@ -17,6 +18,8 @@ export const Route = createFileRoute("/app/ea/authorize-account")({
       { name: "description", content: "Authorize your MT5 login number and get the values for your EA inputs." },
       { property: "og:title", content: "Authorize your MT5 account" },
       { property: "og:description", content: "Authorize your MT5 login number for DirectionalTrendEA." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: AuthorizeAccount,
@@ -99,13 +102,13 @@ function AuthorizeAccount() {
                 placeholder="e.g. 51234567"
               />
               {error && <p className="text-xs text-pink">{error}</p>}
-              <button
+              <Button
                 type="submit"
                 disabled={authorize.isPending || isLoading}
-                className="rounded-md bg-pink px-4 py-2 text-sm font-medium text-ink hover:bg-white disabled:opacity-50"
+                className="bg-pink text-ink hover:bg-white"
               >
                 {authorize.isPending ? "Authorizing…" : "Authorize this account"}
-              </button>
+              </Button>
             </form>
           </Panel>
         </div>

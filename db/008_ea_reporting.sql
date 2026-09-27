@@ -29,6 +29,7 @@ alter table public.ea_releases add column if not exists checksum_sha256 text;
 alter table public.ea_releases add column if not exists status public.ea_release_status not null default 'draft';
 alter table public.ea_releases add column if not exists minimum_mt5_build integer;
 update public.ea_releases set file_name = file_path where file_name is null;
+update public.ea_releases set status = 'published' where status = 'draft';
 alter table public.ea_releases alter column file_name set not null;
 create unique index if not exists ea_releases_version_key on public.ea_releases (version);
 
