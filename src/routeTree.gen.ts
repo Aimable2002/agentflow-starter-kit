@@ -43,6 +43,8 @@ import { Route as AppConversationsIndexRouteImport } from './routes/app.conversa
 import { Route as AppConversationsConversationIdRouteImport } from './routes/app.conversations.$conversationId'
 import { Route as AppEaAuthorizeAccountRouteImport } from './routes/app.ea.authorize-account'
 import { Route as AppEaBillingRouteImport } from './routes/app.ea.billing'
+import { Route as AppEaDocumentationRouteImport } from './routes/app.ea.documentation'
+import { Route as AppEaReleasesRouteImport } from './routes/app.ea.releases'
 import { Route as AppSettingsAccountRouteImport } from './routes/app.settings.account'
 import { Route as AppSettingsApiKeysRouteImport } from './routes/app.settings.api-keys'
 import { Route as AppSettingsNotificationsRouteImport } from './routes/app.settings.notifications'
@@ -225,6 +227,16 @@ const AppEaBillingRoute = AppEaBillingRouteImport.update({
   path: '/ea/billing',
   getParentRoute: () => AppRoute,
 } as any)
+const AppEaDocumentationRoute = AppEaDocumentationRouteImport.update({
+  id: '/ea/documentation',
+  path: '/ea/documentation',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppEaReleasesRoute = AppEaReleasesRouteImport.update({
+  id: '/ea/releases',
+  path: '/ea/releases',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppSettingsAccountRoute = AppSettingsAccountRouteImport.update({
   id: '/settings/account',
   path: '/settings/account',
@@ -294,6 +306,8 @@ export interface FileRoutesByFullPath {
   '/app/conversations/$conversationId': typeof AppConversationsConversationIdRoute
   '/app/ea/authorize-account': typeof AppEaAuthorizeAccountRoute
   '/app/ea/billing': typeof AppEaBillingRoute
+  '/app/ea/documentation': typeof AppEaDocumentationRoute
+  '/app/ea/releases': typeof AppEaReleasesRoute
   '/app/settings/account': typeof AppSettingsAccountRoute
   '/app/settings/api-keys': typeof AppSettingsApiKeysRoute
   '/app/settings/notifications': typeof AppSettingsNotificationsRoute
@@ -336,6 +350,8 @@ export interface FileRoutesByTo {
   '/app/conversations/$conversationId': typeof AppConversationsConversationIdRoute
   '/app/ea/authorize-account': typeof AppEaAuthorizeAccountRoute
   '/app/ea/billing': typeof AppEaBillingRoute
+  '/app/ea/documentation': typeof AppEaDocumentationRoute
+  '/app/ea/releases': typeof AppEaReleasesRoute
   '/app/settings/account': typeof AppSettingsAccountRoute
   '/app/settings/api-keys': typeof AppSettingsApiKeysRoute
   '/app/settings/notifications': typeof AppSettingsNotificationsRoute
@@ -380,6 +396,8 @@ export interface FileRoutesById {
   '/app/conversations/$conversationId': typeof AppConversationsConversationIdRoute
   '/app/ea/authorize-account': typeof AppEaAuthorizeAccountRoute
   '/app/ea/billing': typeof AppEaBillingRoute
+  '/app/ea/documentation': typeof AppEaDocumentationRoute
+  '/app/ea/releases': typeof AppEaReleasesRoute
   '/app/settings/account': typeof AppSettingsAccountRoute
   '/app/settings/api-keys': typeof AppSettingsApiKeysRoute
   '/app/settings/notifications': typeof AppSettingsNotificationsRoute
@@ -425,6 +443,8 @@ export interface FileRouteTypes {
     | '/app/conversations/$conversationId'
     | '/app/ea/authorize-account'
     | '/app/ea/billing'
+    | '/app/ea/documentation'
+    | '/app/ea/releases'
     | '/app/settings/account'
     | '/app/settings/api-keys'
     | '/app/settings/notifications'
@@ -467,6 +487,8 @@ export interface FileRouteTypes {
     | '/app/conversations/$conversationId'
     | '/app/ea/authorize-account'
     | '/app/ea/billing'
+    | '/app/ea/documentation'
+    | '/app/ea/releases'
     | '/app/settings/account'
     | '/app/settings/api-keys'
     | '/app/settings/notifications'
@@ -510,6 +532,8 @@ export interface FileRouteTypes {
     | '/app/conversations/$conversationId'
     | '/app/ea/authorize-account'
     | '/app/ea/billing'
+    | '/app/ea/documentation'
+    | '/app/ea/releases'
     | '/app/settings/account'
     | '/app/settings/api-keys'
     | '/app/settings/notifications'
@@ -784,6 +808,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppEaBillingRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/ea/documentation': {
+      id: '/app/ea/documentation'
+      path: '/ea/documentation'
+      fullPath: '/app/ea/documentation'
+      preLoaderRoute: typeof AppEaDocumentationRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/ea/releases': {
+      id: '/app/ea/releases'
+      path: '/ea/releases'
+      fullPath: '/app/ea/releases'
+      preLoaderRoute: typeof AppEaReleasesRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/settings/account': {
       id: '/app/settings/account'
       path: '/settings/account'
@@ -848,6 +886,8 @@ interface AppRouteChildren {
   AppConversationsConversationIdRoute: typeof AppConversationsConversationIdRoute
   AppEaAuthorizeAccountRoute: typeof AppEaAuthorizeAccountRoute
   AppEaBillingRoute: typeof AppEaBillingRoute
+  AppEaDocumentationRoute: typeof AppEaDocumentationRoute
+  AppEaReleasesRoute: typeof AppEaReleasesRoute
   AppSettingsAccountRoute: typeof AppSettingsAccountRoute
   AppSettingsApiKeysRoute: typeof AppSettingsApiKeysRoute
   AppSettingsNotificationsRoute: typeof AppSettingsNotificationsRoute
@@ -873,6 +913,8 @@ const AppRouteChildren: AppRouteChildren = {
   AppConversationsConversationIdRoute: AppConversationsConversationIdRoute,
   AppEaAuthorizeAccountRoute: AppEaAuthorizeAccountRoute,
   AppEaBillingRoute: AppEaBillingRoute,
+  AppEaDocumentationRoute: AppEaDocumentationRoute,
+  AppEaReleasesRoute: AppEaReleasesRoute,
   AppSettingsAccountRoute: AppSettingsAccountRoute,
   AppSettingsApiKeysRoute: AppSettingsApiKeysRoute,
   AppSettingsNotificationsRoute: AppSettingsNotificationsRoute,

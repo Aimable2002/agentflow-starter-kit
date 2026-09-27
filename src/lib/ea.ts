@@ -43,6 +43,11 @@ export type EaRelease = {
   id: string;
   version: string;
   file_path: string;
+  file_name: string;
+  file_size_bytes: number | null;
+  checksum_sha256: string | null;
+  status: "draft" | "published" | "withdrawn";
+  minimum_mt5_build: number | null;
   release_notes: string | null;
   released_at: string;
 };
@@ -107,10 +112,11 @@ export function useEquitySnapshots(accountId: string | undefined, limit?: number
     queryKey: ["ea", "equity", accountId, limit],
     enabled: !!accountId,
     queryFn: async () => {
+      if (!accountId) return [];
       let q = supabase
         .from("equity_snapshots")
         .select("id,account_id,equity,balance,margin_level,recorded_at")
-        .eq("account_id", accountId!)
+        .eq("account_id", accountId)
         .order("recorded_at", { ascending: false });
       q = q.limit(limit ?? 20000);
       const { data, error } = await q;
@@ -122,24 +128,29 @@ export function useEquitySnapshots(accountId: string | undefined, limit?: number
   });
 }
 
-export function useLatestRelease() {
+export function useEaReleases() {
   return useQuery({
-    queryKey: ["ea", "release"],
+    queryKey: ["ea", "releases"],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("ea_releases")
-        .select("*")
+        .select("id,version,file_path,file_name,file_size_bytes,checksum_sha256,status,minimum_mt5_build,release_notes,released_at")
+        .eq("status", "published")
         .order("released_at", { ascending: false })
-        .limit(1)
-        .maybeSingle();
+        .limit(100);
       if (error) throw error;
-      return data as EaRelease | null;
+      return (data ?? []).map((release) => ({
+        ...release,
+        file_size_bytes: release.file_size_bytes == null ? null : Number(release.file_size_bytes),
+      })) as EaRelease[];
     },
   });
 }
 
-export function releaseUrl(filePath: string) {
-  return supabase.storage.from("ea-downloads").getPublicUrl(filePath).data.publicUrl;
+export async function createReleaseDownloadUrl(filePath: string) {
+  const { data, error } = await supabase.storage.from("ea-downloads").createSignedUrl(filePath, 60, { download: true });
+  if (error) throw new Error("This release file is not available. Please contact support.");
+  return data.signedUrl;
 }
 
 export function useAuthorizeAccount() {
@@ -147,7 +158,7 @@ export function useAuthorizeAccount() {
   return useMutation({
     mutationFn: async (mt5Login: number) => {
       const uid = await currentUserId();
-      const { error } = await supabase.from("accounts").insert({ user_id: uid, mt5_login: mt5Login });
+      const { error } = await supabase.from("accounts").insert({ user_id: uid, mt5_login: mt5Login, status: "inactive" });
       if (error) {
         if (error.code === "23505")
           throw new Error("That MT5 login is already authorized by another user.");
