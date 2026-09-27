@@ -32,6 +32,7 @@ import { Route as AppBillingRouteImport } from './routes/app.billing'
 import { Route as AppChatRouteImport } from './routes/app.chat'
 import { Route as AppUsageRouteImport } from './routes/app.usage'
 import { Route as DocsSlugRouteImport } from './routes/docs.$slug'
+import { Route as EaDirectionalTrendEaRouteImport } from './routes/ea.directional-trend-ea'
 import { Route as AppAgentServicesIndexRouteImport } from './routes/app.agent-services.index'
 import { Route as AppAgentServicesMt5EaRouteImport } from './routes/app.agent-services.mt5-ea'
 import { Route as AppAgentServicesTelegramSignalMonitorRouteImport } from './routes/app.agent-services.telegram-signal-monitor'
@@ -48,6 +49,7 @@ import { Route as AppSettingsNotificationsRouteImport } from './routes/app.setti
 import { Route as AppTasksIndexRouteImport } from './routes/app.tasks.index'
 import { Route as AppTasksTaskIdRouteImport } from './routes/app.tasks.$taskId'
 import { Route as AppEaDashboardIndexRouteImport } from './routes/app.ea.dashboard.index'
+import { Route as AppEaDashboardAccountIdRouteImport } from './routes/app.ea.dashboard.$accountId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -164,6 +166,11 @@ const DocsSlugRoute = DocsSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => DocsRoute,
 } as any)
+const EaDirectionalTrendEaRoute = EaDirectionalTrendEaRouteImport.update({
+  id: '/ea/directional-trend-ea',
+  path: '/ea/directional-trend-ea',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AppAgentServicesIndexRoute = AppAgentServicesIndexRouteImport.update({
   id: '/agent-services/',
   path: '/agent-services/',
@@ -249,6 +256,11 @@ const AppEaDashboardIndexRoute = AppEaDashboardIndexRouteImport.update({
   path: '/ea/dashboard/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppEaDashboardAccountIdRoute = AppEaDashboardAccountIdRouteImport.update({
+  id: '/ea/dashboard/$accountId',
+  path: '/ea/dashboard/$accountId',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -273,6 +285,7 @@ export interface FileRoutesByFullPath {
   '/app/chat': typeof AppChatRoute
   '/app/usage': typeof AppUsageRoute
   '/docs/$slug': typeof DocsSlugRoute
+  '/ea/directional-trend-ea': typeof EaDirectionalTrendEaRoute
   '/app/': typeof AppIndexRoute
   '/app/agent-services/mt5-ea': typeof AppAgentServicesMt5EaRoute
   '/app/agent-services/telegram-signal-monitor': typeof AppAgentServicesTelegramSignalMonitorRoute
@@ -289,6 +302,7 @@ export interface FileRoutesByFullPath {
   '/app/connectors/': typeof AppConnectorsIndexRoute
   '/app/conversations/': typeof AppConversationsIndexRoute
   '/app/tasks/': typeof AppTasksIndexRoute
+  '/app/ea/dashboard/$accountId': typeof AppEaDashboardAccountIdRoute
   '/app/ea/dashboard/': typeof AppEaDashboardIndexRoute
 }
 export interface FileRoutesByTo {
@@ -313,6 +327,7 @@ export interface FileRoutesByTo {
   '/app/chat': typeof AppChatRoute
   '/app/usage': typeof AppUsageRoute
   '/docs/$slug': typeof DocsSlugRoute
+  '/ea/directional-trend-ea': typeof EaDirectionalTrendEaRoute
   '/app': typeof AppIndexRoute
   '/app/agent-services/mt5-ea': typeof AppAgentServicesMt5EaRoute
   '/app/agent-services/telegram-signal-monitor': typeof AppAgentServicesTelegramSignalMonitorRoute
@@ -329,6 +344,7 @@ export interface FileRoutesByTo {
   '/app/connectors': typeof AppConnectorsIndexRoute
   '/app/conversations': typeof AppConversationsIndexRoute
   '/app/tasks': typeof AppTasksIndexRoute
+  '/app/ea/dashboard/$accountId': typeof AppEaDashboardAccountIdRoute
   '/app/ea/dashboard': typeof AppEaDashboardIndexRoute
 }
 export interface FileRoutesById {
@@ -355,6 +371,7 @@ export interface FileRoutesById {
   '/app/chat': typeof AppChatRoute
   '/app/usage': typeof AppUsageRoute
   '/docs/$slug': typeof DocsSlugRoute
+  '/ea/directional-trend-ea': typeof EaDirectionalTrendEaRoute
   '/app/': typeof AppIndexRoute
   '/app/agent-services/mt5-ea': typeof AppAgentServicesMt5EaRoute
   '/app/agent-services/telegram-signal-monitor': typeof AppAgentServicesTelegramSignalMonitorRoute
@@ -371,6 +388,7 @@ export interface FileRoutesById {
   '/app/connectors/': typeof AppConnectorsIndexRoute
   '/app/conversations/': typeof AppConversationsIndexRoute
   '/app/tasks/': typeof AppTasksIndexRoute
+  '/app/ea/dashboard/$accountId': typeof AppEaDashboardAccountIdRoute
   '/app/ea/dashboard/': typeof AppEaDashboardIndexRoute
 }
 export interface FileRouteTypes {
@@ -398,6 +416,7 @@ export interface FileRouteTypes {
     | '/app/chat'
     | '/app/usage'
     | '/docs/$slug'
+    | '/ea/directional-trend-ea'
     | '/app/'
     | '/app/agent-services/mt5-ea'
     | '/app/agent-services/telegram-signal-monitor'
@@ -414,6 +433,7 @@ export interface FileRouteTypes {
     | '/app/connectors/'
     | '/app/conversations/'
     | '/app/tasks/'
+    | '/app/ea/dashboard/$accountId'
     | '/app/ea/dashboard/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -438,6 +458,7 @@ export interface FileRouteTypes {
     | '/app/chat'
     | '/app/usage'
     | '/docs/$slug'
+    | '/ea/directional-trend-ea'
     | '/app'
     | '/app/agent-services/mt5-ea'
     | '/app/agent-services/telegram-signal-monitor'
@@ -454,6 +475,7 @@ export interface FileRouteTypes {
     | '/app/connectors'
     | '/app/conversations'
     | '/app/tasks'
+    | '/app/ea/dashboard/$accountId'
     | '/app/ea/dashboard'
   id:
     | '__root__'
@@ -479,6 +501,7 @@ export interface FileRouteTypes {
     | '/app/chat'
     | '/app/usage'
     | '/docs/$slug'
+    | '/ea/directional-trend-ea'
     | '/app/'
     | '/app/agent-services/mt5-ea'
     | '/app/agent-services/telegram-signal-monitor'
@@ -495,6 +518,7 @@ export interface FileRouteTypes {
     | '/app/connectors/'
     | '/app/conversations/'
     | '/app/tasks/'
+    | '/app/ea/dashboard/$accountId'
     | '/app/ea/dashboard/'
   fileRoutesById: FileRoutesById
 }
@@ -517,6 +541,7 @@ export interface RootRouteChildren {
   TermsRoute: typeof TermsRoute
   UseCasesRoute: typeof UseCasesRoute
   VerifyEmailRoute: typeof VerifyEmailRoute
+  EaDirectionalTrendEaRoute: typeof EaDirectionalTrendEaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -682,6 +707,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsSlugRouteImport
       parentRoute: typeof DocsRoute
     }
+    '/ea/directional-trend-ea': {
+      id: '/ea/directional-trend-ea'
+      path: '/ea/directional-trend-ea'
+      fullPath: '/ea/directional-trend-ea'
+      preLoaderRoute: typeof EaDirectionalTrendEaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/app/agent-services/': {
       id: '/app/agent-services/'
       path: '/agent-services'
@@ -794,6 +826,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppEaDashboardIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/ea/dashboard/$accountId': {
+      id: '/app/ea/dashboard/$accountId'
+      path: '/ea/dashboard/$accountId'
+      fullPath: '/app/ea/dashboard/$accountId'
+      preLoaderRoute: typeof AppEaDashboardAccountIdRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
@@ -817,6 +856,7 @@ interface AppRouteChildren {
   AppConnectorsIndexRoute: typeof AppConnectorsIndexRoute
   AppConversationsIndexRoute: typeof AppConversationsIndexRoute
   AppTasksIndexRoute: typeof AppTasksIndexRoute
+  AppEaDashboardAccountIdRoute: typeof AppEaDashboardAccountIdRoute
   AppEaDashboardIndexRoute: typeof AppEaDashboardIndexRoute
 }
 
@@ -841,6 +881,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppConnectorsIndexRoute: AppConnectorsIndexRoute,
   AppConversationsIndexRoute: AppConversationsIndexRoute,
   AppTasksIndexRoute: AppTasksIndexRoute,
+  AppEaDashboardAccountIdRoute: AppEaDashboardAccountIdRoute,
   AppEaDashboardIndexRoute: AppEaDashboardIndexRoute,
 }
 
@@ -875,6 +916,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermsRoute: TermsRoute,
   UseCasesRoute: UseCasesRoute,
   VerifyEmailRoute: VerifyEmailRoute,
+  EaDirectionalTrendEaRoute: EaDirectionalTrendEaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

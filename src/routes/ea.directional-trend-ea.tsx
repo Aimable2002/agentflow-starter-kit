@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { format } from "date-fns";
 import { Download } from "lucide-react";
@@ -190,7 +191,7 @@ function EaDocs() {
   );
 }
 
-function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
+function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {
   return (
     <section id={id} className="scroll-mt-32">
       <h2 className="mb-4 font-display text-2xl font-semibold tracking-tight">{title}</h2>
