@@ -25,3 +25,8 @@
       - `app/core/router.py` — unused `call_tier_fn` parameter
 - [ ] Run the SQL in the Supabase SQL editor (blocked: this project uses an external
       Supabase project, so migrations cannot be applied from here)
+
+## DirectionalTrendEA reporting
+- [x] Public page /ea/directional-trend-ea, /app/ea/dashboard, /app/ea/dashboard/$accountId, /app/ea/connect-account, /app/ea/billing
+- [ ] Run `db/008_ea_reporting.sql` in Supabase (blocked: external Supabase project)
+- [ ] Fill placeholders: functions base URL, anon key, support email, FAQ answers (blocked: owner input)

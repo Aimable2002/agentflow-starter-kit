@@ -15,6 +15,9 @@ import {
   Bell,
   UserRound,
   LogOut,
+  LineChart,
+  Link2,
+  BadgeCheck,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/app/theme-toggle";
@@ -33,6 +36,9 @@ const primaryNav = [
   { to: "/app/connectors", label: "Connectors", icon: Plug },
   { to: "/app/agent-services", label: "Agent services", icon: Radar, exact: true },
   { to: "/app/agent-services/mt5-ea", label: "MT5 EA execution", icon: ServerCog },
+  { to: "/app/ea/dashboard", label: "EA dashboard", icon: LineChart },
+  { to: "/app/ea/connect-account", label: "Connect account", icon: Link2 },
+  { to: "/app/ea/billing", label: "EA billing", icon: BadgeCheck },
 ] as const;
 
 const accountNav = [
@@ -266,7 +272,7 @@ export function PageHeader({
   actions,
 }: {
   title: string;
-  copy?: string;
+  copy?: string | undefined;
   actions?: ReactNode;
 }) {
   return (
