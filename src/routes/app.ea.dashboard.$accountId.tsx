@@ -87,7 +87,7 @@ function AccountDetail() {
       </div>
     );
 
-  const n = (v: number | null, f = money) => (v == null ? "—" : f(v));
+  const n = (v: number | null, f: (x: number) => string = money) => (v == null ? "—" : f(v));
   const tone = (v: number | null) => (v == null ? undefined : v >= 0 ? "pos" : "neg");
   const chartData = snaps.map((s) => ({ ...s, t: new Date(s.recorded_at).getTime() }));
 
@@ -207,7 +207,7 @@ function AccountDetail() {
         ) : (
           <>
             <div className="grid gap-4 lg:grid-cols-3">
-              <DistChart title="P&L by weekday" data={groupBy(trades, (d) => d.getDay(), 7, (i) => WEEKDAYS[i])} />
+              <DistChart title="P&L by weekday" data={groupBy(trades, (d) => d.getDay(), 7, (i) => WEEKDAYS[i] ?? "")} />
               <DistChart title="P&L by hour" data={groupBy(trades, (d) => d.getHours(), 24, (i) => String(i))} />
               <DistChart title="P&L by month" data={byMonth(trades)} />
             </div>
@@ -241,8 +241,9 @@ function groupBy(trades: EaTrade[], key: (d: Date) => number, size: number, labe
   for (const t of trades) {
     if (!t.close_time) continue;
     const k = key(new Date(t.close_time));
-    b[k].pnl += netOf(t);
-    b[k].count++;
+    const bk = b[k]; if (!bk) continue;
+    bk.pnl += netOf(t);
+    bk.count++;
   }
   return b;
 }

@@ -57,7 +57,7 @@ export function CopyField({ label, value }: { label: string; value: string }) {
   );
 }
 
-export function Stat({ label, value, tone }: { label: string; value: string; tone?: "pos" | "neg" }) {
+export function Stat({ label, value, tone }: { label: string; value: string; tone?: "pos" | "neg" | undefined }) {
   return (
     <div className="rounded-lg border border-line bg-panel p-4">
       <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-mute">{label}</p>

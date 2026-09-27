@@ -272,7 +272,7 @@ export function PageHeader({
   actions,
 }: {
   title: string;
-  copy?: string;
+  copy?: string | undefined;
   actions?: ReactNode;
 }) {
   return (
