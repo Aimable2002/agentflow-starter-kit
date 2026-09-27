@@ -186,7 +186,14 @@ function EaDocs() {
               )}
               {release?.release_notes && <p className="mt-2 text-sm text-fog">{release.release_notes}</p>}
             </div>
-            {release ? (
+            {release && !signedIn ? (
+              <Link
+                to="/login"
+                className="inline-flex items-center gap-2 rounded-md bg-pink px-5 py-2.5 text-sm font-medium text-ink hover:bg-white sm:ml-auto"
+              >
+                <Download className="size-4" /> Log in to download
+              </Link>
+            ) : release ? (
               <a
                 href={releaseUrl(release.file_path)}
                 className="inline-flex items-center gap-2 rounded-md bg-pink px-5 py-2.5 text-sm font-medium text-ink hover:bg-white sm:ml-auto"
