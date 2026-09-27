@@ -40,11 +40,14 @@ import { Route as AppConnectorsIndexRouteImport } from './routes/app.connectors.
 import { Route as AppConnectorsConnectorIdRouteImport } from './routes/app.connectors.$connectorId'
 import { Route as AppConversationsIndexRouteImport } from './routes/app.conversations.index'
 import { Route as AppConversationsConversationIdRouteImport } from './routes/app.conversations.$conversationId'
+import { Route as AppEaBillingRouteImport } from './routes/app.ea.billing'
+import { Route as AppEaConnectAccountRouteImport } from './routes/app.ea.connect-account'
 import { Route as AppSettingsAccountRouteImport } from './routes/app.settings.account'
 import { Route as AppSettingsApiKeysRouteImport } from './routes/app.settings.api-keys'
 import { Route as AppSettingsNotificationsRouteImport } from './routes/app.settings.notifications'
 import { Route as AppTasksIndexRouteImport } from './routes/app.tasks.index'
 import { Route as AppTasksTaskIdRouteImport } from './routes/app.tasks.$taskId'
+import { Route as AppEaDashboardIndexRouteImport } from './routes/app.ea.dashboard.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -205,6 +208,16 @@ const AppConversationsConversationIdRoute =
     path: '/conversations/$conversationId',
     getParentRoute: () => AppRoute,
   } as any)
+const AppEaBillingRoute = AppEaBillingRouteImport.update({
+  id: '/ea/billing',
+  path: '/ea/billing',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppEaConnectAccountRoute = AppEaConnectAccountRouteImport.update({
+  id: '/ea/connect-account',
+  path: '/ea/connect-account',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppSettingsAccountRoute = AppSettingsAccountRouteImport.update({
   id: '/settings/account',
   path: '/settings/account',
@@ -229,6 +242,11 @@ const AppTasksIndexRoute = AppTasksIndexRouteImport.update({
 const AppTasksTaskIdRoute = AppTasksTaskIdRouteImport.update({
   id: '/tasks/$taskId',
   path: '/tasks/$taskId',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppEaDashboardIndexRoute = AppEaDashboardIndexRouteImport.update({
+  id: '/ea/dashboard/',
+  path: '/ea/dashboard/',
   getParentRoute: () => AppRoute,
 } as any)
 
@@ -261,6 +279,8 @@ export interface FileRoutesByFullPath {
   '/app/agent-services/trading-agent': typeof AppAgentServicesTradingAgentRoute
   '/app/connectors/$connectorId': typeof AppConnectorsConnectorIdRoute
   '/app/conversations/$conversationId': typeof AppConversationsConversationIdRoute
+  '/app/ea/billing': typeof AppEaBillingRoute
+  '/app/ea/connect-account': typeof AppEaConnectAccountRoute
   '/app/settings/account': typeof AppSettingsAccountRoute
   '/app/settings/api-keys': typeof AppSettingsApiKeysRoute
   '/app/settings/notifications': typeof AppSettingsNotificationsRoute
@@ -269,6 +289,7 @@ export interface FileRoutesByFullPath {
   '/app/connectors/': typeof AppConnectorsIndexRoute
   '/app/conversations/': typeof AppConversationsIndexRoute
   '/app/tasks/': typeof AppTasksIndexRoute
+  '/app/ea/dashboard/': typeof AppEaDashboardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -298,6 +319,8 @@ export interface FileRoutesByTo {
   '/app/agent-services/trading-agent': typeof AppAgentServicesTradingAgentRoute
   '/app/connectors/$connectorId': typeof AppConnectorsConnectorIdRoute
   '/app/conversations/$conversationId': typeof AppConversationsConversationIdRoute
+  '/app/ea/billing': typeof AppEaBillingRoute
+  '/app/ea/connect-account': typeof AppEaConnectAccountRoute
   '/app/settings/account': typeof AppSettingsAccountRoute
   '/app/settings/api-keys': typeof AppSettingsApiKeysRoute
   '/app/settings/notifications': typeof AppSettingsNotificationsRoute
@@ -306,6 +329,7 @@ export interface FileRoutesByTo {
   '/app/connectors': typeof AppConnectorsIndexRoute
   '/app/conversations': typeof AppConversationsIndexRoute
   '/app/tasks': typeof AppTasksIndexRoute
+  '/app/ea/dashboard': typeof AppEaDashboardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -337,6 +361,8 @@ export interface FileRoutesById {
   '/app/agent-services/trading-agent': typeof AppAgentServicesTradingAgentRoute
   '/app/connectors/$connectorId': typeof AppConnectorsConnectorIdRoute
   '/app/conversations/$conversationId': typeof AppConversationsConversationIdRoute
+  '/app/ea/billing': typeof AppEaBillingRoute
+  '/app/ea/connect-account': typeof AppEaConnectAccountRoute
   '/app/settings/account': typeof AppSettingsAccountRoute
   '/app/settings/api-keys': typeof AppSettingsApiKeysRoute
   '/app/settings/notifications': typeof AppSettingsNotificationsRoute
@@ -345,6 +371,7 @@ export interface FileRoutesById {
   '/app/connectors/': typeof AppConnectorsIndexRoute
   '/app/conversations/': typeof AppConversationsIndexRoute
   '/app/tasks/': typeof AppTasksIndexRoute
+  '/app/ea/dashboard/': typeof AppEaDashboardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -377,6 +404,8 @@ export interface FileRouteTypes {
     | '/app/agent-services/trading-agent'
     | '/app/connectors/$connectorId'
     | '/app/conversations/$conversationId'
+    | '/app/ea/billing'
+    | '/app/ea/connect-account'
     | '/app/settings/account'
     | '/app/settings/api-keys'
     | '/app/settings/notifications'
@@ -385,6 +414,7 @@ export interface FileRouteTypes {
     | '/app/connectors/'
     | '/app/conversations/'
     | '/app/tasks/'
+    | '/app/ea/dashboard/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -414,6 +444,8 @@ export interface FileRouteTypes {
     | '/app/agent-services/trading-agent'
     | '/app/connectors/$connectorId'
     | '/app/conversations/$conversationId'
+    | '/app/ea/billing'
+    | '/app/ea/connect-account'
     | '/app/settings/account'
     | '/app/settings/api-keys'
     | '/app/settings/notifications'
@@ -422,6 +454,7 @@ export interface FileRouteTypes {
     | '/app/connectors'
     | '/app/conversations'
     | '/app/tasks'
+    | '/app/ea/dashboard'
   id:
     | '__root__'
     | '/'
@@ -452,6 +485,8 @@ export interface FileRouteTypes {
     | '/app/agent-services/trading-agent'
     | '/app/connectors/$connectorId'
     | '/app/conversations/$conversationId'
+    | '/app/ea/billing'
+    | '/app/ea/connect-account'
     | '/app/settings/account'
     | '/app/settings/api-keys'
     | '/app/settings/notifications'
@@ -460,6 +495,7 @@ export interface FileRouteTypes {
     | '/app/connectors/'
     | '/app/conversations/'
     | '/app/tasks/'
+    | '/app/ea/dashboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -702,6 +738,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppConversationsConversationIdRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/ea/billing': {
+      id: '/app/ea/billing'
+      path: '/ea/billing'
+      fullPath: '/app/ea/billing'
+      preLoaderRoute: typeof AppEaBillingRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/ea/connect-account': {
+      id: '/app/ea/connect-account'
+      path: '/ea/connect-account'
+      fullPath: '/app/ea/connect-account'
+      preLoaderRoute: typeof AppEaConnectAccountRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/settings/account': {
       id: '/app/settings/account'
       path: '/settings/account'
@@ -737,6 +787,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppTasksTaskIdRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/ea/dashboard/': {
+      id: '/app/ea/dashboard/'
+      path: '/ea/dashboard'
+      fullPath: '/app/ea/dashboard/'
+      preLoaderRoute: typeof AppEaDashboardIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
@@ -750,6 +807,8 @@ interface AppRouteChildren {
   AppAgentServicesTradingAgentRoute: typeof AppAgentServicesTradingAgentRoute
   AppConnectorsConnectorIdRoute: typeof AppConnectorsConnectorIdRoute
   AppConversationsConversationIdRoute: typeof AppConversationsConversationIdRoute
+  AppEaBillingRoute: typeof AppEaBillingRoute
+  AppEaConnectAccountRoute: typeof AppEaConnectAccountRoute
   AppSettingsAccountRoute: typeof AppSettingsAccountRoute
   AppSettingsApiKeysRoute: typeof AppSettingsApiKeysRoute
   AppSettingsNotificationsRoute: typeof AppSettingsNotificationsRoute
@@ -758,6 +817,7 @@ interface AppRouteChildren {
   AppConnectorsIndexRoute: typeof AppConnectorsIndexRoute
   AppConversationsIndexRoute: typeof AppConversationsIndexRoute
   AppTasksIndexRoute: typeof AppTasksIndexRoute
+  AppEaDashboardIndexRoute: typeof AppEaDashboardIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
@@ -771,6 +831,8 @@ const AppRouteChildren: AppRouteChildren = {
   AppAgentServicesTradingAgentRoute: AppAgentServicesTradingAgentRoute,
   AppConnectorsConnectorIdRoute: AppConnectorsConnectorIdRoute,
   AppConversationsConversationIdRoute: AppConversationsConversationIdRoute,
+  AppEaBillingRoute: AppEaBillingRoute,
+  AppEaConnectAccountRoute: AppEaConnectAccountRoute,
   AppSettingsAccountRoute: AppSettingsAccountRoute,
   AppSettingsApiKeysRoute: AppSettingsApiKeysRoute,
   AppSettingsNotificationsRoute: AppSettingsNotificationsRoute,
@@ -779,6 +841,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppConnectorsIndexRoute: AppConnectorsIndexRoute,
   AppConversationsIndexRoute: AppConversationsIndexRoute,
   AppTasksIndexRoute: AppTasksIndexRoute,
+  AppEaDashboardIndexRoute: AppEaDashboardIndexRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
