@@ -11,6 +11,8 @@ export const Route = createFileRoute("/app/ea/billing")({
       { name: "description", content: "See whether each authorized MT5 account is active for trading." },
       { property: "og:title", content: "DirectionalTrendEA billing status" },
       { property: "og:description", content: "Trading activation status for your MT5 accounts." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: EaBilling,

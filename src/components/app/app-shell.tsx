@@ -18,6 +18,8 @@ import {
   LineChart,
   Link2,
   BadgeCheck,
+  BookOpen,
+  PackageOpen,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/app/theme-toggle";
@@ -36,8 +38,10 @@ const primaryNav = [
   { to: "/app/connectors", label: "Connectors", icon: Plug },
   { to: "/app/agent-services", label: "Agent services", icon: Radar, exact: true },
   { to: "/app/agent-services/mt5-ea", label: "MT5 EA execution", icon: ServerCog },
-  { to: "/app/ea/dashboard", label: "EA dashboard", icon: LineChart },
+  { to: "/app/ea/documentation", label: "EA documentation", icon: BookOpen },
+  { to: "/app/ea/releases", label: "EA releases", icon: PackageOpen },
   { to: "/app/ea/authorize-account", label: "Authorize account", icon: Link2 },
+  { to: "/app/ea/dashboard", label: "EA dashboard", icon: LineChart },
   { to: "/app/ea/billing", label: "EA billing", icon: BadgeCheck },
 ] as const;
 
