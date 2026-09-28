@@ -132,25 +132,23 @@ export function useEaReleases() {
   return useQuery({
     queryKey: ["ea", "releases"],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("ea_releases")
-        .select("id,version,file_path,file_name,file_size_bytes,checksum_sha256,status,minimum_mt5_build,release_notes,released_at")
-        .eq("status", "published")
-        .order("released_at", { ascending: false })
-        .limit(100);
-      if (error) throw error;
-      return (data ?? []).map((release) => ({
-        ...release,
-        file_size_bytes: release.file_size_bytes == null ? null : Number(release.file_size_bytes),
-      })) as EaRelease[];
+      const { listEaReleases } = await import("@/lib/ea-releases.functions");
+      return (await listEaReleases()) as EaRelease[];
     },
   });
 }
 
-export async function createReleaseDownloadUrl(filePath: string) {
-  const { data, error } = await supabase.storage.from("ea-downloads").createSignedUrl(filePath, 60, { download: true });
-  if (error) throw new Error("This release file is not available. Please contact support.");
-  return data.signedUrl;
+/** Fetches the file through the signed-in server function and saves it. */
+export async function downloadRelease(version: string) {
+  const { downloadEaRelease } = await import("@/lib/ea-releases.functions");
+  const { fileName, base64 } = await downloadEaRelease({ data: { version } });
+  const bytes = Uint8Array.from(atob(base64), (c) => c.charCodeAt(0));
+  const url = URL.createObjectURL(new Blob([bytes], { type: "application/octet-stream" }));
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = fileName;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
 export function useAuthorizeAccount() {
