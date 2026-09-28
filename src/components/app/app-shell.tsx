@@ -155,31 +155,33 @@ export function AppShell({ children }: { children: ReactNode }) {
           </span>
         </div>
 
-        <div className="p-3">
-          <Link
-            to="/app/chat"
-            className="flex items-center justify-center gap-2 rounded-md bg-pink px-3 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-white"
-          >
-            <MessageSquarePlus className="size-4" />
-            New conversation
-          </Link>
-        </div>
+        <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain py-3">
+          <div className="px-3">
+            <Link
+              to="/app/chat"
+              className="flex items-center justify-center gap-2 rounded-md bg-pink px-3 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-white"
+            >
+              <MessageSquarePlus className="size-4" />
+              New conversation
+            </Link>
+          </div>
 
-        <nav className="space-y-1 px-3">
-          {primaryNav.map((n) => (
-            <NavItem key={n.to} {...n} />
-          ))}
-        </nav>
-
-        <div className="mt-6 px-3">
-          <p className="px-3 pb-2 font-mono text-[10px] uppercase tracking-[0.16em] text-mute">
-            Account
-          </p>
-          <nav className="space-y-1">
-            {accountNav.map((n) => (
+          <nav className="mt-3 space-y-1 px-3">
+            {primaryNav.map((n) => (
               <NavItem key={n.to} {...n} />
             ))}
           </nav>
+
+          <div className="mt-6 px-3 pb-3">
+            <p className="px-3 pb-2 font-mono text-[10px] uppercase tracking-[0.16em] text-mute">
+              Account
+            </p>
+            <nav className="space-y-1">
+              {accountNav.map((n) => (
+                <NavItem key={n.to} {...n} />
+              ))}
+            </nav>
+          </div>
         </div>
 
         <div className="mt-auto space-y-3 border-t border-line p-4">
@@ -252,7 +254,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           </div>
         </header>
 
-        <nav className="flex gap-1 overflow-x-auto border-b border-line bg-ink2 px-4 py-2 lg:hidden">
+        <nav className="sticky top-16 z-20 flex max-w-full gap-1 overflow-x-auto overscroll-x-contain border-b border-line bg-ink2 px-4 py-2 lg:hidden">
           {[...primaryNav, ...accountNav].map((n) => (
             <Link
               key={n.to}
