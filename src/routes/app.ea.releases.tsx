@@ -5,7 +5,7 @@ import { format } from "date-fns";
 import { PageHeader } from "@/components/app/app-shell";
 import { Panel } from "@/components/pink/primitives";
 import { Button } from "@/components/ui/button";
-import { createReleaseDownloadUrl, useEaReleases, type EaRelease } from "@/lib/ea";
+import { downloadRelease, useEaReleases, type EaRelease } from "@/lib/ea";
 
 export const Route = createFileRoute("/app/ea/releases")({
   head: () => ({
@@ -115,8 +115,8 @@ function ReleaseCard({ release, featured = false }: { release: EaRelease; featur
             setDownloading(true);
             setDownloadError(null);
             try {
-              const url = await createReleaseDownloadUrl(release.file_path);
-              window.location.assign(url);
+              await downloadRelease(release.version);
+              setDownloading(false);
             } catch (caught) {
               setDownloadError(caught instanceof Error ? caught.message : "Download could not be started.");
               setDownloading(false);
