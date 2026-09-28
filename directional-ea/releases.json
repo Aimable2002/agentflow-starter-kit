@@ -1,0 +1,13 @@
+[
+  {
+    "version": "1.2",
+    "file_path": "v1.2/prod_direction_v1.2.ex5",
+    "file_name": "prod_direction_v1.2.ex5",
+    "file_size_bytes": 83264,
+    "checksum_sha256": "a31ca2dc924395e36d0c1066bb68822353185d00eabb86362255b79c0579ff0d",
+    "status": "published",
+    "minimum_mt5_build": null,
+    "release_notes": "Production build of DirectionalTrendEA v1.2.",
+    "released_at": "2026-09-28T00:00:00Z"
+  }
+]
