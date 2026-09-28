@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - DirectionalTrendEA binaries live in a private `ea-downloads` bucket and are exposed only through published `ea_releases` rows, so withdrawn or draft algorithms cannot be downloaded.
+- Public navigation stays in `SiteLayout`, while authenticated navigation stays in `AppShell`, so every page inherits one consistent, scroll-safe menu.

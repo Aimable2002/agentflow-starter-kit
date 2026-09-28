@@ -32,3 +32,6 @@
 - [x] Add structured EA releases: version history, current release details, notes, file metadata, and controlled publishing workflow
 - [ ] Run `db/008_ea_reporting.sql` in Supabase (blocked: external Supabase project)
 - [ ] Fill placeholders: functions base URL, anon key, support email, FAQ answers (blocked: owner input)
+
+## Shared navigation
+- [x] Centralize public and signed-in menus in shared layouts and keep long menus independently scrollable

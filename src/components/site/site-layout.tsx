@@ -53,7 +53,7 @@ function SiteHeader() {
         </div>
       </div>
       {open && (
-        <nav className="border-t border-line bg-ink2 px-6 py-4 lg:hidden">
+        <nav className="max-h-[calc(100dvh-4rem)] overflow-y-auto overscroll-contain border-t border-line bg-ink2 px-6 py-4 lg:hidden">
           <ul className="space-y-3 text-sm text-fog">
             {navLinks.map((l) => (
               <li key={l.to}>
