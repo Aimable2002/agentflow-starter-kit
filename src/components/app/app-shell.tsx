@@ -164,7 +164,7 @@ export function AppShell({ children }: { children: ReactNode }) {
               <MessageSquarePlus className="size-4" />
               New conversation
             </Link>
-          </nav>
+          </div>
 
           <nav className="mt-3 space-y-1 px-3">
             {primaryNav.map((n) => (
