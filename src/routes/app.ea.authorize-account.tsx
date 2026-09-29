@@ -5,8 +5,8 @@ import { Panel } from "@/components/pink/primitives";
 import { Button } from "@/components/ui/button";
 import { CopyField, EaStatusBadge, LastSeen } from "@/components/ea/ea-ui";
 import {
-  EA_ANON_KEY_PLACEHOLDER,
-  EA_BASE_URL_PLACEHOLDER,
+  EA_SUPABASE_ANON_KEY,
+  EA_SUPABASE_URL,
   useAuthorizeAccount,
   useEaAccounts,
 } from "@/lib/ea";
@@ -116,9 +116,8 @@ function AuthorizeAccount() {
         <Panel accent>
           <h2 className="font-display text-base font-semibold">Values for your EA setup</h2>
           <div className="mt-4 space-y-4">
-            {/* TODO: replace placeholders with the real values before launch */}
-            <CopyField label="InpSupabaseBaseUrl" value={EA_BASE_URL_PLACEHOLDER} />
-            <CopyField label="InpSupabaseAnonKey" value={EA_ANON_KEY_PLACEHOLDER} />
+            <CopyField label="InpSupabaseBaseUrl" value={EA_SUPABASE_URL} />
+            <CopyField label="InpSupabaseAnonKey" value={EA_SUPABASE_ANON_KEY} />
           </div>
           <p className="mt-4 text-xs text-fog">
             These two values are the same for every user - only the login number above is what
