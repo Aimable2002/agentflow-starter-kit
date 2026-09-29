@@ -53,8 +53,8 @@ export type EaRelease = {
 };
 
 // Public Supabase values for the EA inputs — publishable, safe to ship in the client bundle.
-export const EA_BASE_URL_PLACEHOLDER = "https://vnnspuyxxqvcdeafzyoe.supabase.co";
-export const EA_ANON_KEY_PLACEHOLDER =
+export const EA_SUPABASE_URL = "https://vnnspuyxxqvcdeafzyoe.supabase.co";
+export const EA_SUPABASE_ANON_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZubnNwdXl4eHF2Y2RlYWZ6eW9lIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzOTU4MDUsImV4cCI6MjEwNDk3MTgwNX0.lv-Nz2fDZlc17yk_6MBhlvdok-NWGXlp689Bd_vR3SA";
 export const EA_SUPPORT_PLACEHOLDER = "[INSERT SUPPORT EMAIL/LINK]";
 
