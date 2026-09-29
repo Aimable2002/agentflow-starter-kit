@@ -116,7 +116,6 @@ function AuthorizeAccount() {
         <Panel accent>
           <h2 className="font-display text-base font-semibold">Values for your EA setup</h2>
           <div className="mt-4 space-y-4">
-            {/* TODO: replace placeholders with the real values before launch */}
             <CopyField label="InpSupabaseBaseUrl" value={EA_SUPABASE_URL} />
             <CopyField label="InpSupabaseAnonKey" value={EA_SUPABASE_ANON_KEY} />
           </div>
